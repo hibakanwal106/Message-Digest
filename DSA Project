@@ -1,0 +1,33 @@
+#A message digest is a sequence of bits produced for an input string, using an one-way function. 
+#MD5: Message digest algorithm producing a 128 bit hash value.
+#This is widely used to check data integrity.
+#Import tkinter and hashlib module
+
+from tkinter import *
+import hashlib
+
+w = Tk()
+
+w.title('Hash Calculator')
+a = Label(w, text="HASH CALCULATOR")
+a.pack()
+
+#Create a MD5 Hash 
+
+def hashpassword(text):
+    test = text.encode('utf-8')
+    h = hashlib.md5()
+    h.update(test)
+    return h.hexdigest()    
+def evaluate(event):
+    res.configure(text = "Result: " + str(hashpassword(entry.get())))
+
+Label(w, text="Enter a Message to generate Hash").pack()
+
+entry = Entry(w)
+entry.bind("<Return>", evaluate)
+entry.pack()
+res = Label(w)
+res.pack()
+
+w.mainloop()
